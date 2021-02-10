@@ -3,3 +3,15 @@
   background: none;
   color: inherit;
 }
+.left-panel {
+  min-height: 100vh;
+  position: relative;
+}
+.btn-group {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.no-border {
+  border-radius: 0 !important;
+}

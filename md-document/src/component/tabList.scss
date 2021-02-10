@@ -1,0 +1,14 @@
+.showI {
+    display: none;
+}
+.nav-link:hover .showI {
+    display: inline-block;
+}
+.active {
+    .showI {
+        display: inline-block;
+    }
+}
+.unsave {
+    display: inline-block;
+}
