@@ -15,3 +15,9 @@
 .no-border {
   border-radius: 0 !important;
 }
+.none-files {
+  text-align: center;
+  font-size: 30px;
+  color: #999;
+  margin-top: 140px;
+}

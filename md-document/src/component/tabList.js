@@ -12,7 +12,7 @@ const TabList = ({ files, nowId, unsaveId, onClose, onSel }) => {
       {files.map((item) => {
         let classStyly = className({
           "nav-link": true,
-          active: nowId === item.id,
+          "active": nowId === item.id,
         });
       
         let withCircle = unsaveId.includes(item.id);
