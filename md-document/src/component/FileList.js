@@ -10,24 +10,37 @@ const FileList = ({ files,onFileClick,onFileDelete,onFileSave }) => {
     const KeyEsc = useKey(27)
     const [editState, seteditState] = useState(false);
     const [value, setValue] = useState('');
-    const onCancleEdit = (e)=>{
-        e.preventDefault();
+    const onCancleEdit = (newEidt)=>{
+        // e.preventDefault();
         // console.log(e);
         seteditState(false)
         setValue('')
+        if(newEidt.isEdit){
+            onFileDelete(newEidt.id);
+        }
+        
     }
 useEffect(()=>{
  const keyEnter = (e)=>{
-     if(keyEnters && editState) {
+     console.log(e.keyCode)
+     console.log(editState)
+     let fileItem = files.find(file => file.id === editState);
+     if(e.keyCode === 13 && editState) {
          
-         let fileItem = files.find(file => file.id === editState);
+       
          onFileSave(fileItem.id,value)
          seteditState(false);
          setValue("")
      }
      else if (KeyEsc && editState) {
+         console.log('hh')
+         console.log(fileItem)
          seteditState(false) 
          setValue("");
+        if(fileItem.isEdit){
+            
+            onFileDelete(fileItem.id);
+        }
      }
  }
  document.addEventListener("keyup",keyEnter);
@@ -35,13 +48,21 @@ useEffect(()=>{
      document.removeEventListener("keyup",keyEnter);
  }
 })
+useEffect(()=>{
+    let newEdit = files.filter(files => files.isEdit);
+    //  console.log(newEdit)
+    if(newEdit.length>0) {
+        seteditState(newEdit[0].id);
+        setValue(newEdit[0].title)
+    }
+},[files])
     return (
         <ul className="list-group">
             {
                 files.map(item =>
                     <li className="list-group-item d-flex justify-content-between align-items-center " key={item.id}>
                         {
-                            (editState!==item.id) &&
+                            (editState!==item.id) && (!item.isEdit)&&
                             <>
                                 <span className="col-1">
                                     <FontAwesomeIcon icon={faMarkdown}></FontAwesomeIcon>
@@ -74,12 +95,12 @@ useEffect(()=>{
 
                         }
                         {
-                           ( editState === item.id) &&
+                           ( editState === item.id||item.isEdit) &&
                             <>
-                                <input className="form-control " style={{ height: 24 }} value={value}  onChange={(e) => { setValue(e.target.value) }}></input>
+                                <input className="form-control " style={{ height: 24 }} value={value}  onChange={(e) => { setValue(e.target.value) }} placeholder="请输入内容"></input>
                                 <button type="button" className="btnIcon "
-                                    onClick={(e)=>{
-                                      onCancleEdit(e)
+                                    onClick={()=>{
+                                      onCancleEdit(item)
                                     }}
                                 >
                                     <FontAwesomeIcon title="关闭" size="lg" icon={faTimesCircle}></FontAwesomeIcon>

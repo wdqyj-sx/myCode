@@ -1,7 +1,6 @@
 import React,{useState,useEffect,useRef} from "react";
 import {faSearch,faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import usekeyPressd from "../hook/useKey";
 import PropTypes from "prop-types";
 import useKey from "../hook/useKey";
 
@@ -13,15 +12,15 @@ const FileSearch = ({title,onFileSearch}) =>{
     const closeSearch = ()=>{
         setinputActive(false)
         setValue("")
+    
     }
     const node = useRef(null);
     useEffect(()=>{
         //组件加载时添加键盘监听事件
       
-      const  handleKey = ()=>{
-            // console.log(keyEnter)
-            // console.log(KeyEsc)
-            if(keyEnter && inputActive){
+      const  handleKey = (e)=>{
+           
+            if(e.keyCode === 13 && inputActive){
                 onFileSearch(value)
             }
             else if(KeyEsc&& inputActive){

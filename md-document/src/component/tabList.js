@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./tabList.scss";
 
 const TabList = ({ files, nowId, unsaveId, onClose, onSel }) => {
+  // console.log(files);
   return (
     <ul className="nav nav-pills mb-3">
       
       {files.map((item) => {
+        // console.log(item);
         let classStyly = className({
           "nav-link": true,
           "active": nowId === item.id,

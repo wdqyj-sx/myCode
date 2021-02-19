@@ -5,6 +5,7 @@
 }
 .left-panel {
   min-height: 100vh;
+  min-width: 200px;
   position: relative;
 }
 .btn-group {
